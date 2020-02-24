@@ -48,6 +48,32 @@
             <p class="bottom-text" id=""><span></span></p>
         </div>
 
+
+        <div class="edd-metrics-box" id="earnings-this-month">
+            <p class="top-text"><?php _e('This Month', 'edd-metrics'); ?></p>
+            <h2></h2>
+            <p class="bottom-text" id=""><span></span></p>
+        </div>
+
+        <div class="edd-metrics-box" id="monthly">
+            <p class="top-text"><?php _e('Est. Monthly Revenue', 'edd-metrics'); ?></p>
+            <h2></h2>
+            <p class="bottom-text" id=""><span></span></p>
+        </div>
+
+    </div>
+
+
+
+    <div class="edd-metrics-flex edd-metrics-flex-combined" style="margin-bottom:25px">
+
+        <div class="edd-metrics-box" id="new-customers">
+            <p class="top-text"><?php _e('Today', 'edd-metrics'); ?></p>
+            <h2></h2>
+            <p class="bottom-text" id=""><span></span></p>
+        </div>
+
+
         <div class="edd-metrics-box" id="earnings-this-month">
             <p class="top-text"><?php _e('This Month', 'edd-metrics'); ?></p>
             <h2></h2>
@@ -67,6 +93,7 @@
 <div class="edd-metrics-boxes edd-metrics-boxes-full">
 
     <div class="edd-metrics-flex edd-metrics-flex-half" style="margin-bottom:5px">
+
 
         <div class="edd-metrics-box" id="new-customers">
             <p class="top-text"><?php _e('New Customers', 'edd-metrics'); ?></p>

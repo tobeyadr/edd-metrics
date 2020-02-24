@@ -22,7 +22,8 @@ if( !defined( 'ABSPATH' ) ) exit;
 function EDD_Metrics_admin_scripts( $hook ) {
 
     // Use minified libraries if SCRIPT_DEBUG is turned off
-	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+//	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+	$suffix = '';
 
     /**
      * @todo		This block loads styles or scripts explicitly on the
