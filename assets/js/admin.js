@@ -126,7 +126,10 @@
         $('#refunds-compare').addClass(data.earnings.refunds.compare.classes);
         $('#refunds-compare span').html(data.earnings.refunds.compare.percentage + compareTemp).removeClass().addClass(data.earnings.refunds.compare.classes);
 
-        eddm.doLineChart(data.lineChart);
+        if (data.lineChart) {
+
+            eddm.doLineChart(data.lineChart);
+        }
 
     }
 
@@ -161,9 +164,21 @@
         }
 
 
-        $( '#new-customers').html(data.groundhogg.new_customers);
-        $( '#lost-customers').html(data.groundhogg.lost_customers);
+        $( '#new-customers').html(data.groundhogg.new_customers.total);
+        $('#new-customers-compare').addClass(data.groundhogg.new_customers.compare.classes);
+        $('#new-customers-compare span').html(data.groundhogg.new_customers.compare.percentage + compareTemp).removeClass().addClass(data.groundhogg.new_customers.compare.classes);
+
+
+        $( '#lost-customers').html(data.groundhogg.lost_customers.total);
+        $('#lost-customers-compare').addClass(data.groundhogg.lost_customers.compare.classes);
+        $('#lost-customers-compare span').html(data.groundhogg.lost_customers.compare.percentage + compareTemp).removeClass().addClass(data.groundhogg.lost_customers.compare.classes);
+
+
+
+
         $( '#lost-total').html(data.groundhogg.lost_total);
+
+
         $( '#beginning-period').html(data.groundhogg.beginning_period);
         $( '#end-period').html(data.groundhogg.end_period);
         $( '#churn').html(data.groundhogg.churn);
@@ -217,7 +232,10 @@
             // ...
         }
 
-        eddm.doLineChart(data.lineChart);
+        if(data.lineChart) {
+
+            eddm.doLineChart(data.lineChart);
+        }
 
         $('.edd-metrics-chart-wrapper #circleG').remove();
 

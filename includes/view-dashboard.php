@@ -90,14 +90,14 @@
         <div class="edd-metrics-box">
             <p class="top-text"><?php _e( 'New Customers', 'edd-metrics' ); ?></p>
             <h2 id="new-customers"></h2>
-            <!-- <p class="bottom-text" id="subscriptions-compare"><span></span></p> -->
+            <p class="bottom-text" id="new-customers-compare"><span></span></p>
         </div>
 
 
         <div class="edd-metrics-box">
             <p class="top-text"><?php _e( 'Lost Customers', 'edd-metrics' ); ?></p>
             <h2 id="lost-customers"></h2>
-            <!-- <p class="bottom-text" id="subscriptions-compare"><span></span></p> -->
+             <p class="bottom-text" id="lost-customers-compare"><span></span></p>
         </div>
 
 

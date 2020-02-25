@@ -202,6 +202,31 @@ if ( ! class_exists( 'EDD_Metrics_Functions' ) ) {
 
 		}
 
+
+		/**
+		 * Get comparison of current and previous recurring revenue
+		 *
+		 * @access      public
+		 * @return      array()
+		 * @since       0.5.2
+		 */
+		public static function compare_values( $a, $b ) {
+
+			if ( empty( $a ) || empty ( $b ) ) {
+				return array(
+					'classes'    => '',
+					'percentage' => '-'
+				);
+			}
+
+			return array(
+				'classes'    => self::get_arrow_classes( $a, $b ),
+				'percentage' => self::get_percentage( $a, $b )
+			);
+
+		}
+
+
 		/**
 		 * Return earnings
 		 *
@@ -1010,15 +1035,41 @@ if ( ! class_exists( 'EDD_Metrics_Functions' ) ) {
 
 		public static function get_groundhogg_stats() {
 
-//		    $dates =self::get_compare_dates();
+			$dates = self::get_compare_dates();
+
+			$new_customers          = self::get_edd_customers_by_date( self::$startstr, self::$endstr );
+			$new_customers_previous = self::get_edd_customers_by_date( $dates [ 'previous_start' ], $dates [ 'previous_end' ] );
+
+			$end_period =  self::get_edd_customers_by_date( '2000-01-01', self::$endstr ) ;
+
+			$lost_customer          = self::get_lost_customers();
+			$lost_customer_previous = self::get_lost_customers( strtotime($dates [ 'previous_start' ]), strtotime($dates [ 'previous_end' ] ) );
+
+			$churn = number_format( ( self::get_lost_customers() / self::get_edd_customers_by_date( '2000-01-01', self::$endstr ) ) * 100, 2, '.', '' );
+			$churn_previous = number_format( ( self::get_lost_customers() / self::get_edd_customers_by_date( '2000-01-01', self::$endstr ) ) * 100, 2, '.', '' );
+
+
+
 			return [
-				'new_customers'    => self::get_edd_customers_by_date( self::$startstr, self::$endstr ),
-				'lost_customers'   => self::get_lost_customers(), //todo
+				'new_customers'  => [
+					'total'   => $new_customers,
+					'compare' => self::compare_values( $new_customers, $new_customers_previous )
+				],
+				'lost_customers' => [
+					'total'   => $lost_customer,
+					'compare' => self::compare_values( $lost_customer, $lost_customer_previous ),
+				],
 				'beginning_period' => self::get_edd_customers_by_date( '2000-01-01', date( 'Y-m-d', self::$start - 86400 ) ),
-				'end_period'       => self::get_edd_customers_by_date( '2000-01-01', self::$endstr ),
-				'churn_period'     => number_format( ( self::get_lost_customers() / self::get_edd_customers_by_date( '2000-01-01', self::$endstr ) ) * 100, 2, '.', '' ) . "%",
-				'churn'            => number_format( ( self::get_lost_customers( strtotime( '2000-01-01', strtotime( date( 'Y-m-d' ) ) ) ) / self::get_edd_customers_by_date( '2000-01-01', date( 'Y-m-d' ) ) ) * 100, 2, '.', '' ) . "%",
-				'lost_total'       => self::get_lost_customers( strtotime( '2000-01-01', strtotime( date( 'Y-m-d' ) ) ) )
+				'end_period'       =>$end_period,
+
+                'churn_period'     => [
+	                'total'   => $churn,
+	                'compare' => self::compare_values( $churn, $churn_previous )
+                ],
+
+                'churn'            => number_format( ( self::get_lost_customers( strtotime( '2000-01-01', strtotime( date( 'Y-m-d' ) ) ) ) / self::get_edd_customers_by_date( '2000-01-01', date( 'Y-m-d' ) ) ) * 100, 2, '.', '' ) . "%",
+
+                'lost_total'       => self::get_lost_customers( strtotime( '2000-01-01', strtotime( date( 'Y-m-d' ) ) ) )
 			];
 
 
